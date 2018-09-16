@@ -1,0 +1,35 @@
+/* IDeal */
+
+.img-profil{
+    width: 150px;
+    height: 150px;
+}
+
+.alignLeft {
+    float: left;
+    margin-right: 15px;
+}
+
+.alignRight {
+    float: right;
+    margin-left: 15px;
+}
+
+.alignCenter {
+    display: table;
+    margin: 0 auto 15px;
+}
+
+.alignTextCenter { text-align: center }
+.textBold { font-weight: bold }
+.textBlack { color: black }
+.cursorAsPointer { cursor:pointer }
+
+
+
+#monCompte { display: none; }
+#partnerPage { display: none; }
+#favoritePage { display: none; }
+#administrationPage { display: none; }
+#addOfferPage { display: none; }
+
