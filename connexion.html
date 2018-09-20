@@ -45,16 +45,6 @@
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
-                <!-- LOGO -->
-                <li>
-                        <a href="./" >
-                            <img width="120" height="50" src="vendor/img/logo.png" alt="">
-                        </a>
-
-                </li>
-                <!-- /LOGO -->
-            </ul>
-            <ul class="header-links pull-left">
                 <li><a href="#"><i class="fa fa-phone"></i> +33 768 329 294</a></li>
                 <li><a href="#"><i class="fa fa-envelope-o"></i> contact@ideal.com</a></li>
                 <li><a href="#"><i class="fa fa-map-marker"></i> 4 rue Émile Blin, 94200 Ivry-Sur-Seine, France </a></li>
@@ -84,6 +74,25 @@
 </header>
 <!-- /HEADER -->
 
+<!-- NAVIGATION -->
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- NAV -->
+            <ul class="main-nav nav navbar-nav">
+                <li><a href="./index.html">Accueil</a></li>
+                <li class="active"><a href="./connexion.html">Connexion</a></li>
+            </ul>
+            <!-- /NAV -->
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+</nav>
+<!-- /NAVIGATION -->
+
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
@@ -93,10 +102,10 @@
                 <div class="inscription">
                     <p>Connexion à votre compte</p>
                     <form>
-                        <button class="inscription-label">Email</button>
+                        <button class="inscription-label" disabled>Email</button>
                         <input class="input" type="email" id="email" placeholder="Entrer votre Email" required>
 
-                        <button class="inscription-label">Mot de passe</button>
+                        <button class="inscription-label" disabled>Mot de passe</button>
                         <input class="input" type="password" id="password" placeholder="Entrer un mote de passe" required>
 
                         <button class="inscription-btn-validation" id="connexion" type="submit">Se connecter !</button>
@@ -175,16 +184,16 @@
 <!-- /FOOTER -->
 
 <!-- jQuery Plugins -->
+
+<script src="vendor/js/jquery.min.js"></script>
+<script src="vendor/js/jquery.zoom.min.js"></script>
+<script src="vendor/js/bootstrap.min.js"></script>
 <script src="vendor/i18next/i18next.min.js"></script>
 <script src="vendor/js/custom.js"></script>
-<script src="vendor/js/translate.js"></script>
 <script src="vendor/js/authentification.js"></script>
-<script src="vendor/js/jquery.min.js"></script>
-<script src="vendor/js/bootstrap.min.js"></script>
 <script src="vendor/js/slick.min.js"></script>
 <script src="vendor/js/nouislider.min.js"></script>
-<script src="vendor/js/jquery.zoom.min.js"></script>
 <script src="vendor/js/main.js"></script>
-
+<script src="vendor/js/translate.js"></script>
 </body>
 </html>

@@ -1,32 +1,22 @@
 
-let divArray = ['#deconnexion', '#connexionInscription', '#monCompte', '#favoris', '#favoris']; //Don't forget add DIV in custom.css
 let urlServer = "http://localhost:18080";//"http://78.192.12.79:18080";
 let urlArticle = urlServer + "/article";
 let urlUser = urlServer + "/user";
 
 $(function(){
-
-    /*$('#inputConfirmPasswordSignUp').change(function() {
-        var aBool = isValidatePassword();
-    });*/
-
     initArticleJson();
     initTableUserJson();
     initTableArticleJson();
 
-
-    $('#connexion').on('click', function () {
-        showDiv(divArray, '#moncompte');
-    });
-
     //getToken('user@mail.com', 'password');
-    $('#loginButton').on('click', function () {
+    $('#connexion').on('click', function () {
         console.log("Je lance la function");
         //var loginData = $("#userSignup").serialize();
         //getToken('user@mail.com', 'password');
-        let theMail = $("#inputMail").val();
-        let thePassword = $("#inputPassword").val();
-        console.log(theMail + "    " + thePassword);
+        let theMail = $("#email").val();
+        let thePassword = $("#password").val();
+        console.log(">" + theMail);
+        console.log(">" + thePassword);
         checkLoginPwd(theMail, thePassword);
         //getToken(theMail, thePassword);
         console.log("J'ai terminé la function");
@@ -52,6 +42,12 @@ $(function(){
             console.log("A var is  empty");
         }
         console.log("End click btn add deal");
+
+        $.alert({
+            title: 'Alert!',
+            content: 'Simple alert!',
+        });
+        document.location.href="index.html";
     });
 
     function addArticle(articleName, description, price) {
@@ -67,6 +63,7 @@ $(function(){
 
             }).done((json) => { console.log("Success request : Add Deal");/*S'exécute en cas de succès de la requête*/ });
     }
+
     //application/json
     //contentType: 'application/json',
     function showDiv(arrayOfDiv, idDiv) {
@@ -106,49 +103,57 @@ $(function(){
     }
 
     function initArticleJson(){
-        //$.support.cors = true;
-        $.getJSON(
-            urlArticle,
-            function(data){
-                if (data.length > 1) {
+        $.ajax(
+            {
+                contentType: 'application/json',
+                type: 'get',
+                dataType: 'json',
+                url: urlArticle,
+                error: (xhr, status, error) => { console.log("Error request : initArticleJson");/* var errorMessage = xhr.responseJSON.message */ }
+            }).done((data /*json*/) => {
+                console.log("Success request : initArticleJson");/*S'exécute en cas de succès de la requête*/
+                if (data.length > 0) {
                     $.each(data, function (key, val) {
-                        $( "<div/>", { class: "col-md-3 col-xs-6", html: articleHTML(val.id, val.name, val.created, val.updated, val.description, val.price) } ).appendTo( '#listDeal' );
+                        $("<div/>", { class: "col-md-3 col-xs-6", html: articleHTML(val.id, val.name, val.created, val.updated, val.description, val.price)}).appendTo('#listDeal');
                     });
                 }
-            }
-        );
+            });
     }
 
     function initTableUserJson(){
-        //$.support.cors = true;
-        console.log("Initialiation users json table");
-        $.getJSON(
-            urlUser,
-            function(data){
-                if (data.length > 1) {
-                    //console.log(data.length);
-                    $.each(data, function (key, val) {
-                        //console.log(val.mail);
-                        $( "<tr/>", { html: lineOfUserTableHTML(val.id, val.mail, val.password, val.psw_hash, val.inscription, val.admin) } ).appendTo( '#userTable' );
-                    });
-                }
+        $.ajax(
+            {
+                contentType: 'application/json',
+                type: 'get',
+                dataType: 'json',
+                url: urlUser,
+                error: (xhr, status, error) => { console.log("Error request : initTableUserJson");/* var errorMessage = xhr.responseJSON.message */ }
+            }).done((data /*json*/) => {
+            console.log("Success request : initTableUserJson");/*S'exécute en cas de succès de la requête*/
+            if (data.length > 0) {
+                $.each(data, function (key, val) {
+                    $( "<tr/>", { html: lineOfUserTableHTML(val.id, val.mail, val.password, val.psw_hash, val.inscription, val.admin) } ).appendTo( '#userTable' );
+                });
             }
-        );
+        });
     }
 
     function initTableArticleJson(){
-        //$.support.cors = true;
-        console.log("Initialiation articles json table");
-        $.getJSON(
-            urlArticle,
-            function(data){
-                if (data.length > 1) {
-                    $.each(data, function (key, val) {
-                        $( "<tr/>", { html: lineOfDealTableHTML(val.id, val.name, val.created, val.updated, val.description, val.price) } ).appendTo( '#dealTable' );
-                    });
-                }
+        $.ajax(
+            {
+                contentType: 'application/json',
+                type: 'get',
+                dataType: 'json',
+                url: urlArticle,
+                error: (xhr, status, error) => { console.log("Error request : initTableUserJson");/* var errorMessage = xhr.responseJSON.message */ }
+            }).done((data /*json*/) => {
+            console.log("Success request : initTableUserJson");/*S'exécute en cas de succès de la requête*/
+            if (data.length > 0) {
+                $.each(data, function (key, val) {
+                    $( "<tr/>", { html: lineOfDealTableHTML(val.id, val.name, val.created, val.updated, val.description, val.price) } ).appendTo( '#dealTable' );
+                });
             }
-        );
+        });
     }
 
 
@@ -167,12 +172,12 @@ $(function(){
             "<!-- product -->" +
             "<div class='product'>" +
             "<div class='product-img'>" +
-            "<img src='vendor/img/product01.png'>" +
+            "<img src='vendor/img/product" + id + ".png'>" +
             "</div>" +
             "<div class='product-body'>" +
-            "<h3 class='product-name'><a href='www.google.fr'>product name goes here</a></h3>" +
-            "<h4 class='product-price'>980.00€</h4>" +
-            "<p class='product-category'>01/07/2018</p>" +
+            "<h3 class='product-name'><a href='www.google.fr'>" + name + "</a></h3>" +
+            "<h4 class='product-price'>" + price + "€</h4>" +
+            "<p class='product-category'>" + created + "</p>" +
             "<div class='product-rating'>" +
             "<i class='fa fa-star'></i>" +
             "<i class='fa fa-star'></i>" +
@@ -191,9 +196,6 @@ $(function(){
             "</div>" +
             "</div>" +
             "<!-- /product -->"
-
-
-
         );
             //articleHTMLmodal(id, name, created, updated, description, price));
     }
@@ -241,8 +243,6 @@ $(function(){
         return myString;
     }
 
-
-
     function lineOfUserTableHTML (id, username, password, password_hash, inscription, admin){
         if(username === null) username = "User name";
         if(password === null) password = "010203";
@@ -258,7 +258,10 @@ $(function(){
             "<td>" + inscription + "</td>"+
             "<td>the/picture/url</td>"+
             "<td>" + admin + "</td>"+
-            "<td><span class='cursorAsPointer fa fa-trash-o' onclick='deleteOnTable(" + id + ", \"user\" );'></span></td>");
+            "<td>" +
+            " <span class='cursorAsPointer fa fa-trash-o' onclick='deleteOnTable(" + id + ", \"user\" );'> </span>" +
+            " <span class='cursorAsPointer fa fa-edit' onclick='goToUpdateOnTable(" + id + ", \"user\");'> </span>" +
+            "</td>");
     }
 
     function lineOfDealTableHTML (id, name, created, updated, description, price){
@@ -279,28 +282,54 @@ $(function(){
             "<td>" + price + "</td>"+
             "<td>the/picture/url</td>"+
             "<td>" +
-            "   <span class='cursorAsPointer fa fa-trash-o' onclick='deleteOnTable(" + id + ", \"article\");'> </span>" +
-            "   <span class='cursorAsPointer fa fa-edit' onclick='updateOnTable(" + id + ", \"article\");'> </span>" +
+            " <span class='cursorAsPointer fa fa-trash-o' onclick='deleteOnTable(" + id + ", \"article\");'> </span>" +
+            " <span class='cursorAsPointer fa fa-edit' onclick='goToUpdateOnTable(" + id + ", \"article\");'> </span>" +
             "</td>");
     }
 
 });
 
 function deleteOnTable(id, tableName){
-    //$.support.cors = true;
     let result = confirm("Confirmez-vous la suppression ?");
     if (result) {
-        $.ajax(
-            {
+        $.ajax({
                 type: 'delete',
                 url: urlServer + "/" + tableName + "/" + id,
-                error: (xhr, status, error) => {
-                    console.log("Error request : Delete Deal");
-                    /* var errorMessage = xhr.responseJSON.message */
-                }
-
+                error: (xhr, status, error) => { console.log("Error request : deleteOnTable"); /* var errorMessage = xhr.responseJSON.message */ }
             }).done((json) => {
-            console.log("Success request : Delete Deal");
+            console.log("Success request : deleteOnTable");
+            /*S'exécute en cas de succès de la requête*/
+            location.reload();
+        });
+    }
+}
+
+function goToUpdateOnTable(id, tableName){
+    let result = confirm("Confirmez-vous la modification ?");
+    if (result) {
+        $.ajax({
+            type: 'update',
+            url: urlServer + "/" + tableName + "/" + id,
+            data: JSON.stringify ({name : articleName, img : 0, description : description, price : price}),
+            error: (xhr, status, error) => { console.log("Error request : updateOnTable"); /* var errorMessage = xhr.responseJSON.message */ }
+        }).done((json) => {
+            console.log("Success request : updateOnTable");
+            /*S'exécute en cas de succès de la requête*/
+            location.reload();
+        });
+    }
+}
+
+function updateOnTable(id, tableName){
+    let result = confirm("Confirmez-vous la modification ?");
+    if (result) {
+        $.ajax({
+                type: 'update',
+                url: urlServer + "/" + tableName + "/" + id,
+                data: JSON.stringify ({name : articleName, img : 0, description : description, price : price}),
+                error: (xhr, status, error) => { console.log("Error request : updateOnTable"); /* var errorMessage = xhr.responseJSON.message */ }
+            }).done((json) => {
+            console.log("Success request : updateOnTable");
             /*S'exécute en cas de succès de la requête*/
             location.reload();
         });

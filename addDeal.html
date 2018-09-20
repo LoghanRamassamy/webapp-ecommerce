@@ -149,18 +149,18 @@
     <div class="container">
         <!-- row -->
         <div class="row">
-            <div class="formulaire"> <!--inscription-->
+            <div class="inscription">
                 <form>
-                    <label class="inscription-label">Libellé</label>
+                    <button class="inscription-label" disabled>Libellé</button>
                     <input class="input" type="text" id="libelle" placeholder="Entrer le libellé" required>
 
                     <!--<label class="inscription-label">Image</label>
                     <input class="input" type="file" name="theFile" accept="image/*" required>-->
 
-                    <label class="inscription-label">Prix (€)</label>
+                    <button class="inscription-label" disabled>Prix (€)</button>
                     <input class="input" type="number" id="price" min="0" step="any"  placeholder="125.50" required>
 
-                    <label class="inscription-label">Description</label>
+                    <button class="inscription-label" disabled>Description</button>
                     <textarea class="input" type="text" id="description" placeholder="Entrer une description" required></textarea>
 
                     <button class="inscription-btn-validation" id="btnAddDeal" type="submit">Ajouter l'offre</button>
@@ -279,6 +279,5 @@
 <script src="vendor/js/nouislider.min.js"></script>
 <script src="vendor/js/main.js"></script>
 <script src="vendor/js/translate.js"></script>
-
 </body>
 </html>

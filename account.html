@@ -149,16 +149,19 @@
     <div class="container">
         <!-- row -->
         <div class="row">
-            <div class="formulaire"> <!--inscription-->
+            <div class="inscription">
                 <form>
-                    <img height="42" width="42" src="vendor/img/profilPicture.jpg">
-                    <input type="file" name="theFile" accept="image/*" required>
+                    <button class="inscription-label" disabled>Photo</button>
 
-                    <label class="inscription-label">Nom d'utilisateur</label>
-                    <input class="input" type="text" id="userName" value="Dvil971" required>
+                    <input type="file" name="file" id="file" accept="image/*" class="inputfile" />
+                    <label for="file"><img height="42" width="42" src="vendor/img/profilPicture.jpg"></label>
+                    <br>
 
-                    <label class="inscription-label">Mot de passe</label>
-                    <input class="input" type="password" id="password" value="hannibal" required>
+                    <button class="inscription-label" disabled>Nom d'utilisateur</button>
+                    <input class="input" type="text" id="userName" value="Dvil971" />
+
+                    <button class="inscription-label" disabled>Mot de passe</button>
+                    <input class="input" type="password" id="password" value="hannibal" />
 
                     <button class="inscription-btn-validation" id="btnAddDeal" type="submit">Modifier mes informations</button>
                 </form>

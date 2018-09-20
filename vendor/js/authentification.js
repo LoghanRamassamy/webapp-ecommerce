@@ -37,18 +37,17 @@ function oauthSignIn() {
 }
 
 function checkLoginPwd (mail, pwd){
-    let url = urlServer + "user"
     let checkLogin = false;
 
     $.support.cors = true;
     $.getJSON(
-        url,
+        urlUser,
         function(data){
             if (data.length > 1) {
                 $.each(data, function (key, val) {
-                    alert(val.id + val.mail + val.password + val.psw_hash + val.inscription + val.admin);
+                    console.log(val.id + val.mail + val.password + val.psw_hash + val.inscription + val.admin);
                     if(mail == val.mail && pwd == val.password) {
-                        alert("Utilisateur trouvé");
+                        console.log("Utilisateur trouvé");
                         checkLogin = true;
                         getToken(val.id, val.mail, val.password);
                     }
@@ -56,7 +55,7 @@ function checkLoginPwd (mail, pwd){
             }
         }
     );
-    alert("alert !!");
+    console.log("Suite ...");
     if(!checkLogin){
         alert("Email ou mot de passe invalide !");
     }
@@ -79,39 +78,39 @@ function getToken(id, mail, pwd){
     $.post(tokenUrl, params).then(doneCallbacksTest, failCallbacksTest);
     //window.localStorage.setItem('theToken', $.post(tokenUrl, params).then(doneCallbacksTest, failCallbacksTest));
     //var signin = $.post(tokenUrl, params).then(doneCallbacksTest, failCallbacksTest);
-    //alert(signin);
+    //console.log(signin);
     /*
     $.post(tokenUrl, params)
         .done(function( data ) {
-            alert( "Data Loaded: " + data );
+            console.log( "Data Loaded: " + data );
         });
     */
 
-    //alert(signin);
+    //console.log(signin);
 
 }
 function doneCallbacksTest(){
-    alert("Token is generate !");
-    //alert(window.localStorage);
-    //alert(window.localStorage.getItem('theToken'));
+    console.log("Token is generate !");
+    //console.log(window.localStorage);
+    //console.log(window.localStorage.getItem('theToken'));
 
     let url = "http://localhost:8888/user/1"
     $.support.cors = true;
     $.getJSON(
         url,
         function(data){
-            alert(data.id + data.mail + data.password + data.psw_hash + data.inscription + data.admin);
+            console.log(data.id + data.mail + data.password + data.psw_hash + data.inscription + data.admin);
             /*if (data.length > 1) {
                 $.each(data, function (key, val) {
-                    alert(val.id + val.mail + val.password + val.psw_hash + val.inscription + val.admin);
+                    console.log(val.id + val.mail + val.password + val.psw_hash + val.inscription + val.admin);
                 });
             }*/
         }
     );
 }
 function failCallbacksTest(){
-    alert("FAIL !");
-    //alert(window.localStorage.getItem('theToken'));
+    console.log("FAIL !");
+    //console.log(window.localStorage.getItem('theToken'));
 }
 
 
