@@ -45,7 +45,35 @@ $(function(){
 
         $.alert({
             title: 'Alert!',
-            content: 'Simple alert!',
+            content: 'Connexion réussi :D',
+        });
+        document.location.href="index.html";
+    });
+
+    $('#btnAddUser').on('click', function () {
+        console.log("Click btn add user");
+        //console.log($("#articleName").val(), $("#articleDescription").val(), $("#articlePrice").val());
+
+
+        let email = $("#email").val(),
+            pseudo = $("#pseudo").val(),
+            password = $("#password").val();
+
+        console.log(">" + email);
+        console.log(">" + pseudo);
+        console.log(">" + password);
+
+        if (email || pseudo || password){
+            console.log("A var is not empty");
+            addUser(email, password);
+        }else{
+            console.log("A var is  empty");
+        }
+        console.log("End click btn add user");
+
+        $.alert({
+            title: 'Alert!',
+            content: 'Vous êtes bien inscrit :)',
         });
         document.location.href="index.html";
     });
@@ -62,6 +90,20 @@ $(function(){
                 error: (xhr, status, error) => { console.log("Error request : Add Deal");/* var errorMessage = xhr.responseJSON.message */ }
 
             }).done((json) => { console.log("Success request : Add Deal");/*S'exécute en cas de succès de la requête*/ });
+    }
+
+    function addUser(userEmail, userPassword) {
+        //$.support.cors = true;
+        $.ajax(
+            {
+                contentType: 'application/json',
+                type: 'post',
+                dataType: 'json',
+                data: JSON.stringify ({email : userEmail, img : 0, isAdmin : false}),
+                url: urlUser,
+                error: (xhr, status, error) => { console.log("Error request : Add User");/* var errorMessage = xhr.responseJSON.message */ }
+
+            }).done((json) => { console.log("Success request : Add User");/*S'exécute en cas de succès de la requête*/ });
     }
 
     //application/json
@@ -175,7 +217,7 @@ $(function(){
             "<img src='vendor/img/product" + id + ".png'>" +
             "</div>" +
             "<div class='product-body'>" +
-            "<h3 class='product-name'><a href='www.google.fr'>" + name + "</a></h3>" +
+            "<h3 class='product-name'><a href='#' data-toggle='modal' data-target='#DealModal" + id + "'>" + name + "</a></h3>" +
             "<h4 class='product-price'>" + price + "€</h4>" +
             "<p class='product-category'>" + created + "</p>" +
             "<div class='product-rating'>" +
@@ -188,16 +230,16 @@ $(function(){
             "<div class='product-btns'>" +
             "<button><i class='fa fa-heart'></i><span class='tooltipp'>J'aime</span></button>" +
             "<button class='add-to-wishlist'><i class='fa fa-plus-square-o'></i><span class='tooltipp'>Ajouter aux favoris</span></button>" +
-            "<button class='quick-view' data-toggle='modal' data-target='#offerModal'><i class='fa fa-eye'></i><span class='tooltipp'>Aperçus</span></button>" +
+            "<button class='quick-view' data-toggle='modal' data-target='#DealModal" + id + "'><i class='fa fa-eye'></i><span class='tooltipp'>Aperçus</span></button>" +
             "</div>" +
             "</div>" +
             "<div class='add-to-cart'>" +
             "<a target='_blank' href='http://www.google.fr'><button class='add-to-cart-btn' ><i class='fa fa-shopping-cart'></i> Aller vers le deal</button></a>" +
             "</div>" +
             "</div>" +
-            "<!-- /product -->"
+            "<!-- /product -->" +
+            articleHTMLmodal(id, name, created, updated, description, price)
         );
-            //articleHTMLmodal(id, name, created, updated, description, price));
     }
 
     function articleHTMLmodal(id, name, created, updated, description, price){
@@ -209,14 +251,19 @@ $(function(){
             "<div class='modal-header'>" +
             "<h5 class='modal-title textBold' id='DealModalLabel'>" + name + "</h5>" +
             "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
-            "<span aria-hidden='true'>&times;</span>" +
             "</button>" +
             "</div>" +
             "<div class='modal-body'>" +
             "<div class='row'>" +
             "<div class='col-lg-4'>" +
-            "<a href='#'><img src='http://placehold.it/700x400' alt=''></a>" +
-            "<small class='text-muted alignLeft'>&#9733; &#9733; &#9733; &#9733; &#9734;</small>" +
+            "<a href='#'><img src='vendor/img/product" + id + ".png'></a>" +
+            "<div class='product-rating'>" +
+            "<i class='fa fa-star'></i>" +
+            "<i class='fa fa-star'></i>" +
+            "<i class='fa fa-star'></i>" +
+            "<i class='fa fa-star'></i>" +
+            "<i class='fa fa-star-o'></i>" +
+            "</div>" +
             "<small class='text-muted alignRight'>" + updated + "</small>" +
             "</div>" +
             "<div class='col-lg-8'>" +
@@ -254,7 +301,6 @@ $(function(){
             "<th scope='row'>" + id + "</th>"+
             "<td>" + username + "</td>"+
             "<td>" + password + "</td>"+
-            "<td>" + password_hash + "</td>"+
             "<td>" + inscription + "</td>"+
             "<td>the/picture/url</td>"+
             "<td>" + admin + "</td>"+

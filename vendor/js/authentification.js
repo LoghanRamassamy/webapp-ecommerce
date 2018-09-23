@@ -39,7 +39,7 @@ function oauthSignIn() {
 function checkLoginPwd (mail, pwd){
     let checkLogin = false;
 
-    $.support.cors = true;
+    //$.support.cors = true;
     $.getJSON(
         urlUser,
         function(data){
