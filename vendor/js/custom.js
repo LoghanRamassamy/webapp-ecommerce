@@ -4,66 +4,59 @@ let urlArticle = urlServer + "/article";
 let urlUser = urlServer + "/user";
 
 $(function(){
+    let isConnected = localStorage['connected'];
+
     initArticleJson();
     initTableUserJson();
     initTableArticleJson();
 
-    //getToken('user@mail.com', 'password');
+    //
+
     $('#connexion').on('click', function () {
         console.log("Je lance la function");
         //var loginData = $("#userSignup").serialize();
         //getToken('user@mail.com', 'password');
-        let theMail = $("#email").val();
-        let thePassword = $("#password").val();
-        console.log(">" + theMail);
-        console.log(">" + thePassword);
-        checkLoginPwd(theMail, thePassword);
-        //getToken(theMail, thePassword);
-        console.log("J'ai terminé la function");
-    });
+        let email = $("#email").val(),
+            password = $("#password").val();
 
-    $('#btnAddDeal').on('click', function () {
-        console.log("Click btn add deal");
-        //console.log($("#articleName").val(), $("#articleDescription").val(), $("#articlePrice").val());
+        console.log(">" + email);
+        console.log(">" + password);
 
-
-        let libelle = $("#libelle").val(),
-            description = $("#description").val(),
-            price = $("#price").val();
-
-        console.log(">" + libelle);
-        console.log(">" + description);
-        console.log(">" + price);
-
-        if (libelle || description || price){
+        if (email && password){
             console.log("A var is not empty");
-            addArticle(libelle, description, parseFloat(price));
+            //alert();
+            checkLoginPwd(email, password);
+            //getToken(email, password);
         }else{
             console.log("A var is  empty");
         }
-        console.log("End click btn add deal");
 
-        $.alert({
-            title: 'Alert!',
-            content: 'Connexion réussi :D',
-        });
-        document.location.href="index.html";
+        console.log("J'ai terminé la function");
     });
+
+    //
+
+    $('#deconnexion').on('click', function () {
+        console.log("Je lance la function");
+        goDeconnexion();
+        console.log("J'ai terminé la function");
+    });
+
+    //
 
     $('#btnAddUser').on('click', function () {
         console.log("Click btn add user");
         //console.log($("#articleName").val(), $("#articleDescription").val(), $("#articlePrice").val());
 
-
-        let email = $("#email").val(),
-            pseudo = $("#pseudo").val(),
-            password = $("#password").val();
+        let email = $('#email').val(),
+            pseudo = $('#pseudo').val(),
+            password = $('#password').val();
 
         console.log(">" + email);
         console.log(">" + pseudo);
         console.log(">" + password);
 
-        if (email || pseudo || password){
+        if (email && pseudo && password){
             console.log("A var is not empty");
             addUser(email, password);
         }else{
@@ -71,12 +64,40 @@ $(function(){
         }
         console.log("End click btn add user");
 
-        $.alert({
-            title: 'Alert!',
-            content: 'Vous êtes bien inscrit :)',
-        });
+        alert("Vous êtes bien inscrit :)");
         document.location.href="index.html";
     });
+
+    //
+
+    $('#btnAddDeal').on('click', function () {
+        console.log("Click btn add deal");
+        //console.log($("#articleName").val(), $("#articleDescription").val(), $("#articlePrice").val());
+
+
+        let libelle = $('#libelle').val(),
+            description = $('#description').val(),
+            price = $('#price').val();
+
+        console.log(">" + libelle);
+        console.log(">" + description);
+        console.log(">" + price);
+
+        if (libelle && description && price){
+            console.log("A var is not empty");
+            addArticle(libelle, description, parseFloat(price));
+        }else{
+            console.log("A var is  empty");
+        }
+        console.log("End click btn add deal");
+
+        alert("Votre article a bien été ajouté :)");
+        document.location.href="index.html";
+    });
+
+    //
+
+
 
     function addArticle(articleName, description, price) {
         //$.support.cors = true;
@@ -93,7 +114,6 @@ $(function(){
     }
 
     function addUser(userEmail, userPassword) {
-        //$.support.cors = true;
         $.ajax(
             {
                 contentType: 'application/json',
@@ -174,7 +194,7 @@ $(function(){
             console.log("Success request : initTableUserJson");/*S'exécute en cas de succès de la requête*/
             if (data.length > 0) {
                 $.each(data, function (key, val) {
-                    $( "<tr/>", { html: lineOfUserTableHTML(val.id, val.mail, val.password, val.psw_hash, val.inscription, val.admin) } ).appendTo( '#userTable' );
+                    $( "<tr/>", { html: lineOfUserTableHTML(val.id, val.mail, val.inscription, val.img, val.admin) } ).appendTo( '#userTable' );
                 });
             }
         });
@@ -198,9 +218,6 @@ $(function(){
         });
     }
 
-
-    //{"id":1,"name":"LaveTout","created":null,"updated":null,"description":null,"price":null}
-
     function articleHTML (id, name, created, updated, description, price){
         if(name === null) name = "Item inconnu";
         if(created === null) created = "01/01/2000";
@@ -221,16 +238,17 @@ $(function(){
             "<h4 class='product-price'>" + price + "€</h4>" +
             "<p class='product-category'>" + created + "</p>" +
             "<div class='product-rating'>" +
-            "<i class='fa fa-star'></i>" +
-            "<i class='fa fa-star'></i>" +
-            "<i class='fa fa-star'></i>" +
-            "<i class='fa fa-star'></i>" +
-            "<i class='fa fa-star-o'></i>" +
+            "<i class='fas fa-star'></i>" +
+            "<i class='fas fa-star'></i>" +
+            "<i class='fas fa-star'></i>" +
+            "<i class='fas fa-star-half-alt'></i>" +
+            "<i class='far fa-star'></i>" +
             "</div>" +
             "<div class='product-btns'>" +
-            "<button><i class='fa fa-heart'></i><span class='tooltipp'>J'aime</span></button>" +
-            "<button class='add-to-wishlist'><i class='fa fa-plus-square-o'></i><span class='tooltipp'>Ajouter aux favoris</span></button>" +
-            "<button class='quick-view' data-toggle='modal' data-target='#DealModal" + id + "'><i class='fa fa-eye'></i><span class='tooltipp'>Aperçus</span></button>" +
+            "<button><i class='far fa-thumbs-down'></i></i><span class='tooltipp'>J'aime</span></button>" +
+            "<button class='add-to-wishlist'><i class='far fa-heart'></i><span class='tooltipp'>Ajouter aux favoris</span></button>" +
+            "<button class='quick-view' data-toggle='modal' data-target='#DealModal" + id + "'><i class='far fa-eye'></i><span class='tooltipp'>Aperçus</span></button>" +
+            "<button><i class='far fa-thumbs-up'></i><span class='tooltipp'>J'aime pas</span></button>" +
             "</div>" +
             "</div>" +
             "<div class='add-to-cart'>" +
@@ -290,23 +308,21 @@ $(function(){
         return myString;
     }
 
-    function lineOfUserTableHTML (id, username, password, password_hash, inscription, admin){
-        if(username === null) username = "User name";
-        if(password === null) password = "010203";
-        if(password_hash === null) password_hash = "false";
+    function lineOfUserTableHTML (id, mail, inscription, img, admin){
+        if(mail === null) mail = "User name";
         if(inscription === null) inscription = "01/01/2000";
         if(admin === null) admin = "false";
+        if(img === null) img = "./img/img01.";
 
         return(
             "<th scope='row'>" + id + "</th>"+
-            "<td>" + username + "</td>"+
-            "<td>" + password + "</td>"+
+            "<td>" + mail + "</td>"+
             "<td>" + inscription + "</td>"+
-            "<td>the/picture/url</td>"+
+            "<td>./vendor/img/user" + id + ".png</td>"+
             "<td>" + admin + "</td>"+
             "<td>" +
-            " <span class='cursorAsPointer fa fa-trash-o' onclick='deleteOnTable(" + id + ", \"user\" );'> </span>" +
-            " <span class='cursorAsPointer fa fa-edit' onclick='goToUpdateOnTable(" + id + ", \"user\");'> </span>" +
+            " <span class='fas fa-user-minus cursorAsPointer' onclick='deleteOnTable(" + id + ", \"user\" );'> </span>" +
+            " <span class='fas fa-edit cursorAsPointer' onclick='goToUpdateOnTable(" + id + ", \"user\");'> </span>" +
             "</td>");
     }
 
@@ -326,12 +342,150 @@ $(function(){
             "<td>" + updated + "</td>"+
             "<td>" + brefDescription + "</td>"+
             "<td>" + price + "</td>"+
-            "<td>the/picture/url</td>"+
+            "<td>./vendor/img/product" + id + ".png</td>"+
             "<td>" +
-            " <span class='cursorAsPointer fa fa-trash-o' onclick='deleteOnTable(" + id + ", \"article\");'> </span>" +
-            " <span class='cursorAsPointer fa fa-edit' onclick='goToUpdateOnTable(" + id + ", \"article\");'> </span>" +
+            " <i class='fas fa-trash-alt cursorAsPointer' onclick='deleteOnTable(" + id + ", \"article\");'> </i>" +
+            " <i class='fas fa-edit cursorAsPointer' onclick='goToUpdateOnTable(" + id + ", \"article\");'> </i>" +
             "</td>");
     }
+
+    //AUTH
+    /*
+     * Create form to request access token from Google's OAuth 2.0 server.
+     */
+
+    function oauthSignIn() {
+        // Google's OAuth 2.0 endpoint for requesting an access token
+        let oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+
+        // Create <form> element to submit parameters to OAuth 2.0 endpoint.
+        let form = document.createElement('form');
+        form.setAttribute('method', 'GET'); // Send as a GET request.
+        form.setAttribute('action', oauth2Endpoint);
+
+        // Parameters to pass to OAuth 2.0 endpoint.
+        let params = {'client_id': 'YOUR_CLIENT_ID',
+            'redirect_uri': 'YOUR_REDIRECT_URI',
+            'response_type': 'token',
+            'scope': 'https://www.googleapis.com/auth/drive.metadata.readonly',
+            'include_granted_scopes': 'true',
+            'state': 'pass-through value'};
+
+
+
+        // Add form parameters as hidden input values.
+        for (let p in params) {
+            let input = document.createElement('input');
+            input.setAttribute('type', 'hidden');
+            input.setAttribute('name', p);
+            input.setAttribute('value', params[p]);
+            form.appendChild(input);
+        }
+
+        // Add form to page and submit it to open the OAuth 2.0 endpoint.
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function checkLoginPwd (mail, pwd){
+        $.ajax({
+            contentType: 'application/json',
+            type: 'get',
+            dataType: 'json',
+            url: urlUser,
+            error: (xhr, status, error) => { console.log("Error request : checkLoginPwd");/* var errorMessage = xhr.responseJSON.message */ }
+        }).done((data /*json*/) => {
+            console.log("Success request : checkLoginPwd");/*S'exécute en cas de succès de la requête*/
+            if (data.length > 0) {
+                $.each(data, function (key, val) {
+                    console.log(">" + val.id);
+                    console.log("->" + val.mail);
+                    console.log("->" + mail);
+                    console.log(">" + val.inscription);
+                    console.log(">" + val.img);
+                    console.log(">" + val.admin);
+                    if(mail.toUpperCase().trim() == (val.mail).toUpperCase().trim()) {
+                        if (!isConnected) localStorage['connected'] = "yes";
+                        alert("Connexion réussi !! :D");
+                        document.location.href="index.html";
+                        //return true;
+                        //getToken(val.id, val.mail, val.password); //Ca fonctionne mais le serveur n'est pas en mesure d'ajouter le contenue dans la base de donné
+                    }
+                });
+            }
+        });
+    }
+
+    function goDeconnexion(){
+        if (isConnected) localStorage.clear();
+        alert("Déconnexion...");
+        document.location.href="index.html";
+    }
+
+    function getToken(id, mail, pwd){
+    //var signin = function() {
+
+        let tokenUrl = urlServer + "oauth2/token";
+
+        let params = {"grant_type":"password",
+            "client_id":id,
+            "username":mail,
+            "password":pwd,
+            "secret":"secret_",
+            "scope":"nimportequoi"
+        };
+
+        $.post(tokenUrl, params).then(doneCallbacksTest, failCallbacksTest);
+        //window.localStorage.setItem('theToken', $.post(tokenUrl, params).then(doneCallbacksTest, failCallbacksTest));
+        //var signin = $.post(tokenUrl, params).then(doneCallbacksTest, failCallbacksTest);
+        //console.log(signin);
+        /*
+        $.post(tokenUrl, params)
+            .done(function( data ) {
+                console.log( "Data Loaded: " + data );
+            });
+        */
+
+        //console.log(signin);
+
+    }
+    function doneCallbacksTest(){
+        console.log("Token is generate !");
+        //console.log(window.localStorage);
+        //console.log(window.localStorage.getItem('theToken'));
+
+        let url = "http://localhost:8888/user/1"
+        $.support.cors = true;
+        $.getJSON(
+            url,
+            function(data){
+                console.log(data.id + data.mail + data.password + data.psw_hash + data.inscription + data.admin);
+                /*if (data.length > 1) {
+                    $.each(data, function (key, val) {
+                        console.log(val.id + val.mail + val.password + val.psw_hash + val.inscription + val.admin);
+                    });
+                }*/
+            }
+        );
+    }
+    function failCallbacksTest(){
+        console.log("FAIL !");
+        //console.log(window.localStorage.getItem('theToken'));
+    }
+
+
+//window.localStorage.setItem(key, value);
+//window.localStorage.getItem(key);
+
+
+    /*
+    var params = {"grant_type":"password",
+            "client_id":"acme1",
+            "username":aMail,
+            "password":aPassword,
+            "secret":"secret_",
+            "scope":"nimportequoi"};
+     */
 
 });
 
