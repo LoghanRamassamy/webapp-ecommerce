@@ -2,6 +2,7 @@
 let urlServer = "http://localhost:18080";//"http://78.192.12.79:18080";
 let urlArticle = urlServer + "/article";
 let urlUser = urlServer + "/user";
+let urlImg = urlServer + "/upload";
 
 $(function(){
     let isConnected = localStorage['connected'];
@@ -28,8 +29,12 @@ $(function(){
         $('#favoris').hide();
     }
 
-
     //
+
+
+    $('#searchh').on('change', function () {
+        recherche();
+    });
 
     $('#connexion').on('click', function () {
         console.log("Je lance la function");
@@ -578,4 +583,17 @@ function updateOnTable(id, tableName){
             location.reload();
         });
     }
+}
+
+function recherche(){
+    let searchValue = $('#searchh').val();
+    let articleName = $('.product-name > a');
+    let divArticle = $('.product');
+    for(let i = 0; i < divArticle.length; i++){
+        if ($(articleName[i]).text().toUpperCase() != null && $(articleName[i]).text().toUpperCase() != ""  && $(articleName[i]).text().toUpperCase().indexOf(searchValue.toUpperCase()) > -1)
+            $(divArticle[i]).parent().show();
+        else
+            $(divArticle[i]).parent().hide();
+    }
+
 }
