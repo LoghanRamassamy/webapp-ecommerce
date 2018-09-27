@@ -54,9 +54,9 @@
                 <li><a href="#"><i class="fas fa-globe-americas" id="selectLanguage"></i> English</a></li>
 
                 <!-- Account Dropdown -->
-                <li>
+                <li id="monCompte">
                     <div class="dropdown">
-                        <a class="dropdown-toggle cursorAsPointer" id="monCompte" data-toggle="dropdown" aria-expanded="true"><i class="fas fa-user-alt"></i> Mon compte</a>
+                        <a class="dropdown-toggle cursorAsPointer" data-toggle="dropdown" aria-expanded="true"><i class="fas fa-user-alt"></i> Mon compte</a>
                         <div class="cart-dropdown">
                             <div class="tradUserSetting"><a href="account.html"><i class="fas fa-cog"></i> Paramètre de compte</a></div>
                             <div class="tradAdministration"><a href="administration.html"><i class="fas fa-sliders-h"></i> Administration</a></div>
@@ -66,8 +66,8 @@
                 </li>
                 <!-- /Account Dropdown -->
 
-                <li><a href="connexion.html" id="connexionInscription"><i class="fas fa-sign-in-alt"></i> Connexion/Inscription</a></li>
-                <li><a href="#" id="deconnexion"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+                <li id="connexionInscription"><a href="connexion.html"><i class="fas fa-sign-in-alt"></i> Connexion/Inscription</a></li>
+                <li id="deconnexion"><a href="#"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
             </ul>
         </div>
     </div>
@@ -79,42 +79,6 @@
         <div class="container">
             <!-- row -->
             <div class="row">
-                <!-- LOGO -->
-                <div class="col-md-3">
-                    <div class="header-logo">
-                        <a href="./" class="logo">
-                            <img src="vendor/img/logo.png" alt="">
-                        </a>
-                    </div>
-                </div>
-                <!-- /LOGO -->
-
-                <!-- SEARCH BAR -->
-                <div class="col-md-6">
-                    <div class="header-search">
-                        <form>
-                            <input class="input input-select" placeholder="Taper votre recherche ici">
-                            <button class="search-btn">Rechercher</button>
-                        </form>
-                    </div>
-                </div>
-                <!-- /SEARCH BAR -->
-
-                <!-- ACCOUNT -->
-                <div class="col-md-3 clearfix">
-                    <div class="header-ctn">
-                        <!-- Wishlist -->
-                        <div>
-                            <a href="favorite.html">
-                                <i class="fa fa-heart-o"></i>
-                                <span>Favoris</span>
-                                <div class="qty">2</div>
-                            </a>
-                        </div>
-                        <!-- /Wishlist -->
-                    </div>
-                </div>
-                <!-- /ACCOUNT -->
             </div>
             <!-- row -->
         </div>
@@ -132,9 +96,11 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
+                <li><a href="./index.html">Accueil</a></li>
                 <li><a href="account.html">Paramètre de compte</a></li>
                 <li><a href="administration.html">Administration</a></li>
                 <li class="active"><a href="addDeal.html">Ajouter un deal</a></li>
+                <li><a href="favorite.html">Mes deal favoris</a></li>
             </ul>
             <!-- /NAV -->
         </div>
@@ -176,37 +142,6 @@
 
 <!-- NEWSLETTER -->
 <div id="newsletter" class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="newsletter">
-                    <p>S'incrire pour la <strong>NEWSLETTER</strong></p>
-                    <form>
-                        <input class="input" type="email" placeholder="Entrer votre Email">
-                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> S'inscrire</button>
-                    </form>
-                    <ul class="newsletter-follow">
-                        <li>
-                            <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://plus.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
 </div>
 <!-- /NEWSLETTER -->
 
@@ -223,9 +158,9 @@
                         <h3 class="footer-title">À propos de nous</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
                         <ul class="footer-links">
-                            <li><a href="#"><i class="fa fa-map-marker"></i>4 rue Émile Blin, 94200 Ivry-Sur-Seine, France</a></li>
-                            <li><a href="#"><i class="fa fa-phone"></i>+33 768 329 294</a></li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i>contact@ideal.com</a></li>
+                            <li><a href="#"><i class="fas fa-map-marker-alt"></i> 4 rue Émile Blin, 94200 Ivry-Sur-Seine, France</a></li>
+                            <li><a href="#"><i class="fas fa-phone"></i> +33 768 329 294</a></li>
+                            <li><a href="#"><i class="fas fa-at"></i> contact@ideal.com</a></li>
                         </ul>
                     </div>
                 </div>
@@ -234,9 +169,9 @@
                     <div class="footer">
                         <h3 class="footer-title">Informations</h3>
                         <ul class="footer-links">
-                            <li><a href="#">Politique de confidentialité</a></li>
-                            <li><a href="#">Nos partenaires</a></li>
-                            <li><a href="#">Termes & Conditions</a></li>
+                            <li><a href="politique.html">Politique de confidentialité</a></li>
+                            <li><a href="partner.html">Nos partenaires</a></li>
+                            <li><a href="terms.html">Termes & Conditions</a></li>
                         </ul>
                     </div>
                 </div>
@@ -253,11 +188,11 @@
             <!-- row -->
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <span class="copyright">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy; Ideal <script>document.write(new Date().getFullYear());</script> - All rights reserved
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </span>
+							<span class="copyright">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy; Ideal <script>document.write(new Date().getFullYear());</script> - All rights reserved
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</span>
                 </div>
             </div>
             <!-- /row -->
@@ -269,7 +204,7 @@
 <!-- /FOOTER -->
 
 <!-- jQuery Plugins -->
-<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
+
 <script src="vendor/js/jquery.min.js"></script>
 <script src="vendor/js/jquery.zoom.min.js"></script>
 <script src="vendor/js/bootstrap.min.js"></script>-->
@@ -279,5 +214,6 @@
 <script src="vendor/js/nouislider.min.js"></script>
 <script src="vendor/js/main.js"></script>
 <script src="vendor/js/translate.js"></script>
+
 </body>
 </html>

@@ -54,9 +54,9 @@
                 <li><a href="#"><i class="fas fa-globe-americas" id="selectLanguage"></i> English</a></li>
 
                 <!-- Account Dropdown -->
-                <li>
+                <li id="monCompte">
                     <div class="dropdown">
-                        <a class="dropdown-toggle cursorAsPointer" id="monCompte" data-toggle="dropdown" aria-expanded="true"><i class="fas fa-user-alt"></i> Mon compte</a>
+                        <a class="dropdown-toggle cursorAsPointer" data-toggle="dropdown" aria-expanded="true"><i class="fas fa-user-alt"></i> Mon compte</a>
                         <div class="cart-dropdown">
                             <div class="tradUserSetting"><a href="account.html"><i class="fas fa-cog"></i> Paramètre de compte</a></div>
                             <div class="tradAdministration"><a href="administration.html"><i class="fas fa-sliders-h"></i> Administration</a></div>
@@ -66,8 +66,8 @@
                 </li>
                 <!-- /Account Dropdown -->
 
-                <li><a href="connexion.html" id="connexionInscription"><i class="fas fa-sign-in-alt"></i> Connexion/Inscription</a></li>
-                <li><a href="#" id="deconnexion"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+                <li id="connexionInscription"><a href="connexion.html"><i class="fas fa-sign-in-alt"></i> Connexion/Inscription</a></li>
+                <li id="deconnexion"><a href="#"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
             </ul>
         </div>
     </div>
@@ -125,6 +125,32 @@
 </header>
 <!-- /HEADER -->
 
+<!-- NAVIGATION -->
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- section filter -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <div class="section-nav">
+                        <ul class="section-tab-nav tab-nav">
+                            <li><a data-toggle="tab" href="#tab1">Prix</a></li>
+                            <li class="active"><a data-toggle="tab" href="#tab1">Date</a></li>
+                            <li><a data-toggle="tab" href="#tab1">Popularité</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /section filter -->
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+</nav>
+<!-- /NAVIGATION -->
+
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
@@ -133,20 +159,6 @@
         <div class="row">
             <!-- STORE -->
             <div id="store" class="col-md-12">
-                <!-- section filter -->
-                <div class="col-md-12">
-                    <div class="section-title">
-                        <div class="section-nav">
-                            <ul class="section-tab-nav tab-nav">
-                                <li><a data-toggle="tab" href="#tab1">Prix</a></li>
-                                <li class="active"><a data-toggle="tab" href="#tab1">Date</a></li>
-                                <li><a data-toggle="tab" href="#tab1">Popularité</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- /section filter -->
-
                 <!-- store products -->
                 <div class="row" id="listDeal">
                     <!-- product -->
@@ -154,7 +166,6 @@
                     <!-- /product -->
                 </div>
                 <!-- /store products -->
-
             </div>
             <!-- /STORE -->
         </div>
@@ -224,9 +235,9 @@
                     <div class="footer">
                         <h3 class="footer-title">Informations</h3>
                         <ul class="footer-links">
-                            <li><a href="#">Politique de confidentialité</a></li>
-                            <li><a href="#">Nos partenaires</a></li>
-                            <li><a href="#">Termes & Conditions</a></li>
+                            <li><a href="politique.html">Politique de confidentialité</a></li>
+                            <li><a href="partner.html">Nos partenaires</a></li>
+                            <li><a href="terms.html">Termes & Conditions</a></li>
                         </ul>
                     </div>
                 </div>

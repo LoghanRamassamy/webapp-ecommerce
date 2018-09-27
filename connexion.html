@@ -54,9 +54,9 @@
                 <li><a href="#"><i class="fas fa-globe-americas" id="selectLanguage"></i> English</a></li>
 
                 <!-- Account Dropdown -->
-                <li>
+                <li id="monCompte">
                     <div class="dropdown">
-                        <a class="dropdown-toggle cursorAsPointer" id="monCompte" data-toggle="dropdown" aria-expanded="true"><i class="fas fa-user-alt"></i> Mon compte</a>
+                        <a class="dropdown-toggle cursorAsPointer" data-toggle="dropdown" aria-expanded="true"><i class="fas fa-user-alt"></i> Mon compte</a>
                         <div class="cart-dropdown">
                             <div class="tradUserSetting"><a href="account.html"><i class="fas fa-cog"></i> Paramètre de compte</a></div>
                             <div class="tradAdministration"><a href="administration.html"><i class="fas fa-sliders-h"></i> Administration</a></div>
@@ -66,11 +66,25 @@
                 </li>
                 <!-- /Account Dropdown -->
 
-                <li><a href="connexion.html" id="connexionInscription"><i class="fas fa-sign-in-alt"></i> Connexion/Inscription</a></li>
+                <li id="connexionInscription"><a href="connexion.html"><i class="fas fa-sign-in-alt"></i> Connexion/Inscription</a></li>
+                <li id="deconnexion"><a href="#"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
             </ul>
         </div>
     </div>
     <!-- /TOP HEADER -->
+
+    <!-- MAIN HEADER -->
+    <div id="header">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+            </div>
+            <!-- row -->
+        </div>
+        <!-- container -->
+    </div>
+    <!-- /MAIN HEADER -->
 </header>
 <!-- /HEADER -->
 
@@ -121,7 +135,6 @@
 
 <!-- NEWSLETTER -->
 <div id="newsletter" class="section">
-
 </div>
 <!-- /NEWSLETTER -->
 
@@ -138,9 +151,9 @@
                         <h3 class="footer-title">À propos de nous</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
                         <ul class="footer-links">
-                            <li><a href="#"><i class="fa fa-map-marker"></i>4 rue Émile Blin, 94200 Ivry-Sur-Seine, France</a></li>
-                            <li><a href="#"><i class="fa fa-phone"></i>+33 768 329 294</a></li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i>contact@ideal.com</a></li>
+                            <li><a href="#"><i class="fas fa-map-marker-alt"></i> 4 rue Émile Blin, 94200 Ivry-Sur-Seine, France</a></li>
+                            <li><a href="#"><i class="fas fa-phone"></i> +33 768 329 294</a></li>
+                            <li><a href="#"><i class="fas fa-at"></i> contact@ideal.com</a></li>
                         </ul>
                     </div>
                 </div>
@@ -149,9 +162,9 @@
                     <div class="footer">
                         <h3 class="footer-title">Informations</h3>
                         <ul class="footer-links">
-                            <li><a href="#">Politique de confidentialité</a></li>
-                            <li><a href="#">Nos partenaires</a></li>
-                            <li><a href="#">Termes & Conditions</a></li>
+                            <li><a href="politique.html">Politique de confidentialité</a></li>
+                            <li><a href="partner.html">Nos partenaires</a></li>
+                            <li><a href="terms.html">Termes & Conditions</a></li>
                         </ul>
                     </div>
                 </div>
@@ -184,7 +197,7 @@
 <!-- /FOOTER -->
 
 <!-- jQuery Plugins -->
-<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
+
 <script src="vendor/js/jquery.min.js"></script>
 <script src="vendor/js/jquery.zoom.min.js"></script>
 <script src="vendor/js/bootstrap.min.js"></script>-->
@@ -194,5 +207,6 @@
 <script src="vendor/js/nouislider.min.js"></script>
 <script src="vendor/js/main.js"></script>
 <script src="vendor/js/translate.js"></script>
+
 </body>
 </html>

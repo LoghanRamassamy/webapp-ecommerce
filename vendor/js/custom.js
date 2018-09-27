@@ -5,10 +5,29 @@ let urlUser = urlServer + "/user";
 
 $(function(){
     let isConnected = localStorage['connected'];
+    let isEmail = localStorage['email'];
+    let isAdmin = localStorage['admin'];
 
     initArticleJson();
     initTableUserJson();
     initTableArticleJson();
+
+    $('#userName').val(localStorage['email']);
+
+    //
+
+    if (isConnected) {
+        $('#connexionInscription').hide(); //.show();
+        $('#monCompte').show();
+        $('#deconnexion').show();
+        $('#favoris').show();
+    } else {
+        $('#connexionInscription').show();
+        $('#monCompte').hide();
+        $('#deconnexion').hide();
+        $('#favoris').hide();
+    }
+
 
     //
 
@@ -64,7 +83,6 @@ $(function(){
         }
         console.log("End click btn add user");
 
-        alert("Vous êtes bien inscrit :)");
         document.location.href="index.html";
     });
 
@@ -91,7 +109,6 @@ $(function(){
         }
         console.log("End click btn add deal");
 
-        alert("Votre article a bien été ajouté :)");
         document.location.href="index.html";
     });
 
@@ -108,9 +125,16 @@ $(function(){
                 dataType: 'json',
                 data: JSON.stringify ({name : articleName, img : 0, description : description, price : price}),
                 url: urlArticle,
-                error: (xhr, status, error) => { console.log("Error request : Add Deal");/* var errorMessage = xhr.responseJSON.message */ }
+                error: (xhr, status, error) => {
+                    alert("Nous somme navrez mais l'ajout de votre article a échoué... Veuillez réessayer s'il vous plaît");
+                    document.location.href="addDeal.html";
+                    console.log("Error request : Add Deal");/* var errorMessage = xhr.responseJSON.message */ }
 
-            }).done((json) => { console.log("Success request : Add Deal");/*S'exécute en cas de succès de la requête*/ });
+            }).done((json) => {
+                alert("Votre article a bien été ajouté !");
+                document.location.href="addDeal.html";
+                console.log("Success request : Add Deal");/*S'exécute en cas de succès de la requête*/
+            });
     }
 
     function addUser(userEmail, userPassword) {
@@ -121,20 +145,16 @@ $(function(){
                 dataType: 'json',
                 data: JSON.stringify ({email : userEmail, img : 0, isAdmin : false}),
                 url: urlUser,
-                error: (xhr, status, error) => { console.log("Error request : Add User");/* var errorMessage = xhr.responseJSON.message */ }
+                error: (xhr, status, error) => {
+                    alert("Nous somme navrez mais la création de votre compte a échoué... Veuillez réessayer s'il vous plaît");
+                    document.location.href="inscription.html";
+                    console.log("Error request : Add User");/* var errorMessage = xhr.responseJSON.message */ }
 
-            }).done((json) => { console.log("Success request : Add User");/*S'exécute en cas de succès de la requête*/ });
+            }).done((json) => {
+                alert("Votre compte a bien été créé !");
+                document.location.href="connexion.html";
+                console.log("Success request : Add User");/*S'exécute en cas de succès de la requête*/ });
     }
-
-    //application/json
-    //contentType: 'application/json',
-    function showDiv(arrayOfDiv, idDiv) {
-        for (let id in arrayOfDiv) {
-            if (arrayOfDiv[id] === idDiv) { $(arrayOfDiv[id]).show(); }
-            else { $(arrayOfDiv[id]).hide(); }
-        }
-    }
-
 
     function isValidPassword() {
         let firstInput = $('#inputPasswordSignUp');
@@ -207,7 +227,8 @@ $(function(){
                 type: 'get',
                 dataType: 'json',
                 url: urlArticle,
-                error: (xhr, status, error) => { console.log("Error request : initTableUserJson");/* var errorMessage = xhr.responseJSON.message */ }
+                error: (xhr, status, error) => {
+                    console.log("Error request : initTableUserJson");/* var errorMessage = xhr.responseJSON.message */ }
             }).done((data /*json*/) => {
             console.log("Success request : initTableUserJson");/*S'exécute en cas de succès de la requête*/
             if (data.length > 0) {
@@ -245,10 +266,10 @@ $(function(){
             "<i class='far fa-star'></i>" +
             "</div>" +
             "<div class='product-btns'>" +
-            "<button><i class='far fa-thumbs-down'></i></i><span class='tooltipp'>J'aime</span></button>" +
+            "<button><i class='far fa-thumbs-up'></i></i><span class='tooltipp'>J'aime</span></button>" +
             "<button class='add-to-wishlist'><i class='far fa-heart'></i><span class='tooltipp'>Ajouter aux favoris</span></button>" +
             "<button class='quick-view' data-toggle='modal' data-target='#DealModal" + id + "'><i class='far fa-eye'></i><span class='tooltipp'>Aperçus</span></button>" +
-            "<button><i class='far fa-thumbs-up'></i><span class='tooltipp'>J'aime pas</span></button>" +
+            "<button><i class='far fa-thumbs-down'></i><span class='tooltipp'>J'aime pas</span></button>" +
             "</div>" +
             "</div>" +
             "<div class='add-to-cart'>" +
@@ -388,12 +409,14 @@ $(function(){
     }
 
     function checkLoginPwd (mail, pwd){
+        alert("Connexion en cour...");
         $.ajax({
             contentType: 'application/json',
             type: 'get',
             dataType: 'json',
             url: urlUser,
-            error: (xhr, status, error) => { console.log("Error request : checkLoginPwd");/* var errorMessage = xhr.responseJSON.message */ }
+            error: (xhr, status, error) => {
+                console.log("Error request : checkLoginPwd");/* var errorMessage = xhr.responseJSON.message */ }
         }).done((data /*json*/) => {
             console.log("Success request : checkLoginPwd");/*S'exécute en cas de succès de la requête*/
             if (data.length > 0) {
@@ -405,8 +428,12 @@ $(function(){
                     console.log(">" + val.img);
                     console.log(">" + val.admin);
                     if(mail.toUpperCase().trim() == (val.mail).toUpperCase().trim()) {
-                        if (!isConnected) localStorage['connected'] = "yes";
-                        alert("Connexion réussi !! :D");
+                        if (!isConnected) {
+                            localStorage['connected'] = val.id;
+                            localStorage['email'] = val.mail;
+                            localStorage['admin'] = val.admin;
+                        }
+                        alert("Connexion réussi !!");
                         document.location.href="index.html";
                         //return true;
                         //getToken(val.id, val.mail, val.password); //Ca fonctionne mais le serveur n'est pas en mesure d'ajouter le contenue dans la base de donné
@@ -500,6 +527,23 @@ function deleteOnTable(id, tableName){
             console.log("Success request : deleteOnTable");
             /*S'exécute en cas de succès de la requête*/
             location.reload();
+        });
+    }
+}
+
+function deleteAccount(tableName){
+    let result = confirm("Attention votre compte ainsi que vos informations vont être supprimmer, êtes-vous sûr ? ");
+    if (result) {
+        $.ajax({
+            type: 'delete',
+            url: urlServer + "/" + tableName + "/" + localStorage['connected'],
+            error: (xhr, status, error) => {
+                console.log("Error request : deleteOnTable"); /* var errorMessage = xhr.responseJSON.message */ }
+        }).done((json) => {
+            console.log("Success request : deleteOnTable");
+            /*S'exécute en cas de succès de la requête*/
+            localStorage.clear();
+            document.location.href="index.html";
         });
     }
 }
