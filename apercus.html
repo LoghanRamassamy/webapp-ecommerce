@@ -51,23 +51,23 @@
                 <li><a href="#"><i class="fas fa-map-marker-alt"></i> 4 rue Émile Blin, 94200 Ivry-Sur-Seine, France</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fas fa-globe-americas" id="selectLanguage"></i> English</a></li>
+                <li><i class="fas fa-globe-americas"></i><a href="#" id="selectLanguage">English</a></li>
 
                 <!-- Account Dropdown -->
                 <li id="monCompte">
                     <div class="dropdown">
-                        <a class="dropdown-toggle cursorAsPointer" data-toggle="dropdown" aria-expanded="true"><i class="fas fa-user-alt"></i> Mon compte</a>
+                        <i class="fas fa-user-alt"></i><a class="dropdown-toggle cursorAsPointer tradMyAccount" data-toggle="dropdown" aria-expanded="true">Mon compte</a>
                         <div class="cart-dropdown">
-                            <div class="tradUserSetting"><a href="account.html"><i class="fas fa-cog"></i> Paramètre de compte</a></div>
-                            <div class="tradAdministration"><a href="administration.html"><i class="fas fa-sliders-h"></i> Administration</a></div>
-                            <div class="tradAddOffer"><a href="addDeal.html"><i class="fas fa-plus-circle"></i> Ajouter une offre</a></div>
+                            <div class="tradUserSetting"><i class="fas fa-cog"></i><a class="tradUserSetting" href="account.html">Paramètre de compte</a></div>
+                            <div class="tradAdministration"><i class="fas fa-sliders-h"></i><a href="administration.html">Administration</a></div>
+                            <div class="tradAddOffer"><i class="fas fa-plus-circle"></i><a class="tradAddOffer" href="addDeal.html">Ajouter une offre</a></div>
                         </div>
                     </div>
                 </li>
                 <!-- /Account Dropdown -->
 
-                <li id="connexionInscription"><a href="connexion.html"><i class="fas fa-sign-in-alt"></i> Connexion/Inscription</a></li>
-                <li id="deconnexion"><a href="#"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+                <li id="connexionInscription"><i class="fas fa-sign-in-alt"></i><a href="connexion.html" class="tradConnexionInscription"> Connexion/Inscription</a></li>
+                <li id="deconnexion"><i class="fas fa-sign-out-alt"></i><a class="tradLogout" href="#">Déconnexion</a></li>
             </ul>
         </div>
     </div>
@@ -93,7 +93,7 @@
                 <div class="col-md-6">
                     <div class="header-search">
                         <form>
-                            <input class="input input-select" id="searchh" placeholder="Taper votre recherche ici">
+                            <input class="input input-select tradSearch" id="searchh">
                             <button class="search-btn" id="search-btn" disabled><i class="fas fa-search"></i></button>
                         </form>
                     </div>
@@ -106,7 +106,7 @@
                         <!-- Wishlist -->
                         <div id="favoris">
                             <a href="favorite.html">
-                                <span>Favoris</span>
+                                <span class="tradFavorite">Favoris</span>
                                 <i class="far fa-heart"></i>
 
                                 <div class="qty" id="qteFavoris">2</div>
@@ -221,7 +221,7 @@
             <div class="row">
                 <div class="col-md-4 col-xs-6">
                     <div class="footer">
-                        <h3 class="footer-title">À propos de nous</h3>
+                        <h3 class="footer-title tradAbout">À propos de nous</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
                         <ul class="footer-links">
                             <li><a href="#"><i class="fas fa-map-marker-alt"></i> 4 rue Émile Blin, 94200 Ivry-Sur-Seine, France</a></li>
@@ -235,9 +235,9 @@
                     <div class="footer">
                         <h3 class="footer-title">Informations</h3>
                         <ul class="footer-links">
-                            <li><a href="politique.html">Politique de confidentialité</a></li>
-                            <li><a href="partner.html">Nos partenaires</a></li>
-                            <li><a href="terms.html">Termes & Conditions</a></li>
+                            <li><a class="tradPolitique" href="politique.html">Politique de confidentialité</a></li>
+                            <li><a class="tradPartner" href="partner.html">Nos partenaires</a></li>
+                            <li><a class="tradTerms" href="terms.html">Termes & Conditions</a></li>
                         </ul>
                     </div>
                 </div>
@@ -273,13 +273,14 @@
 
 <script src="vendor/js/jquery.min.js"></script>
 <script src="vendor/js/jquery.zoom.min.js"></script>
-<script src="vendor/js/bootstrap.min.js"></script>-->
+<script src="vendor/js/bootstrap.min.js"></script>
 <script src="vendor/i18next/i18next.min.js"></script>
 <script src="vendor/js/custom.js"></script>
+<script src="vendor/js/translate.js"></script>
 <script src="vendor/js/slick.min.js"></script>
 <script src="vendor/js/nouislider.min.js"></script>
 <script src="vendor/js/main.js"></script>
-<script src="vendor/js/translate.js"></script>
+
 
 </body>
 </html>

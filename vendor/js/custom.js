@@ -275,14 +275,14 @@ $(function(){
             "<i class='far fa-star'></i>" +
             "</div>" +
             "<div class='product-btns'>" +
-            "<button><i class='far fa-thumbs-up'></i><span class='tooltipp'>J'aime</span></button>" +
-            "<button class='add-to-wishlist'><i class='far fa-heart'></i><span class='tooltipp'>Ajouter aux favoris</span></button>" +
-            "<button class='quick-view' data-toggle='modal' data-target='#DealModal" + id + "'><a href=''><i class='far fa-eye'></i></a> <span class='tooltipp'>Voir plus de détail</span></button>" +
-            "<button><i class='far fa-thumbs-down'></i><span class='tooltipp'>J'aime pas</span></button>" +
+            "<button><i class='far fa-thumbs-up'></i><span class='tooltipp tradLike'>J'aime</span></button>" +
+            "<button class='add-to-wishlist'><i class='far fa-heart'></i><span class='tooltipp tradAddFavorite'>Ajouter aux favoris</span></button>" +
+            "<button class='quick-view' data-toggle='modal' data-target='#DealModal" + id + "'><a href=''><i class='far fa-eye'></i></a> <span class='tooltipp tradMoreDetail'>Voir plus de détail</span></button>" +
+            "<button><i class='far fa-thumbs-down'></i><span class='tooltipp tradDislike'>J'aime pas</span></button>" +
             "</div>" +
             "</div>" +
             "<div class='add-to-cart'>" +
-            "<a target='_blank' href='http://www.google.fr'><button class='add-to-cart-btn' ><i class='fa fa-shopping-cart'></i> Aller vers le deal</button></a>" +
+            "<a target='_blank' href='http://www.google.fr'><button class='add-to-cart-btn tradGoDeal' ><i class='fa fa-shopping-cart'></i> Aller vers le deal</button></a>" +
             "</div>" +
             "</div>" +
             "<!-- /product -->"
