@@ -405,7 +405,7 @@ $(function(){
     function getToken(id, mail, pwd){
     //var signin = function() {
 
-        let tokenUrl = urlServer + "oauth2/token";
+        let tokenUrl = urlServerJava + "oauth2/token";
 
         let params = {"grant_type":"password",
             "client_id":id,
@@ -478,7 +478,7 @@ function deleteOnTable(id, tableName){
     if (result) {
         $.ajax({
                 type: 'delete',
-                url: urlServer + "/" + tableName + "/" + id,
+                url: urlServerJava + "/" + tableName + "/" + id,
                 error: (xhr, status, error) => { console.log("Error request : deleteOnTable"); /* var errorMessage = xhr.responseJSON.message */ }
             }).done((json) => {
             console.log("Success request : deleteOnTable");
