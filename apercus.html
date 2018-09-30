@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>IDEAL</title>
+
+    <!-- Website logo -->
+    <link rel="icon" href="vendor/img/logo.png" />
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="vendor/css/bootstrap.min.css"/>
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="vendor/css/slick.css"/>
+    <link type="text/css" rel="stylesheet" href="vendor/css/slick-theme.css"/>
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="vendor/css/nouislider.min.css"/>
+
+    <!-- Font Awesome Icon --
+    <link rel="stylesheet" href="vendor/css/font-awesome.min.css">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="vendor/css/style.css"/>
+    <link type="text/css" rel="stylesheet" href="vendor/css/custom.css"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<!-- HEADER -->
+<header>
+    <!-- TOP HEADER -->
+    <div id="top-header">
+        <div class="container">
+            <ul class="header-links pull-left">
+                <li><a href="#"><i class="fas fa-phone"></i> +33 768 329 294</a></li>
+                <li><a href="#"><i class="fas fa-at"></i> contact@ideal.com</a></li>
+                <li><a href="#"><i class="fas fa-map-marker-alt"></i> 4 rue Émile Blin, 94200 Ivry-Sur-Seine, France</a></li>
+            </ul>
+            <ul class="header-links pull-right">
+                <li><a href="#"><i class="fas fa-globe-americas" id="selectLanguage"></i> English</a></li>
+
+                <!-- Account Dropdown -->
+                <li id="monCompte">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle cursorAsPointer" data-toggle="dropdown" aria-expanded="true"><i class="fas fa-user-alt"></i> Mon compte</a>
+                        <div class="cart-dropdown">
+                            <div class="tradUserSetting"><a href="account.html"><i class="fas fa-cog"></i> Paramètre de compte</a></div>
+                            <div class="tradAdministration"><a href="administration.html"><i class="fas fa-sliders-h"></i> Administration</a></div>
+                            <div class="tradAddOffer"><a href="addDeal.html"><i class="fas fa-plus-circle"></i> Ajouter une offre</a></div>
+                        </div>
+                    </div>
+                </li>
+                <!-- /Account Dropdown -->
+
+                <li id="connexionInscription"><a href="connexion.html"><i class="fas fa-sign-in-alt"></i> Connexion/Inscription</a></li>
+                <li id="deconnexion"><a href="#"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /TOP HEADER -->
+
+    <!-- MAIN HEADER -->
+    <div id="header">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- LOGO -->
+                <div class="col-md-3">
+                    <div class="header-logo">
+                        <a href="./" class="logo">
+                            <img src="vendor/img/logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <!-- /LOGO -->
+
+                <!-- SEARCH BAR -->
+                <div class="col-md-6">
+                    <div class="header-search">
+                        <form>
+                            <input class="input input-select" id="searchh" placeholder="Taper votre recherche ici">
+                            <button class="search-btn" id="search-btn" disabled><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /SEARCH BAR -->
+
+                <!-- ACCOUNT -->
+                <div class="col-md-3 clearfix">
+                    <div class="header-ctn">
+                        <!-- Wishlist -->
+                        <div id="favoris">
+                            <a href="favorite.html">
+                                <span>Favoris</span>
+                                <i class="far fa-heart"></i>
+
+                                <div class="qty" id="qteFavoris">2</div>
+                            </a>
+                        </div>
+                        <!-- /Wishlist -->
+                    </div>
+                </div>
+                <!-- /ACCOUNT -->
+            </div>
+            <!-- row -->
+        </div>
+        <!-- container -->
+    </div>
+    <!-- /MAIN HEADER -->
+</header>
+<!-- /HEADER -->
+
+<!-- NAVIGATION -->
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- section filter -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <div class="section-nav">
+                        <ul class="section-tab-nav tab-nav">
+                            <li><a data-toggle="tab" href="#tab1">Prix</a></li>
+                            <li class="active"><a data-toggle="tab" href="#tab1">Date</a></li>
+                            <li><a data-toggle="tab" href="#tab1">Popularité</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /section filter -->
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+</nav>
+<!-- /NAVIGATION -->
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- STORE -->
+            <div id="store" class="col-md-12">
+                <!-- store products -->
+                <div class="row" id="listDeal">
+                    <!-- product -->
+                    <!-- Edit with JS -->
+                    <!-- /product -->
+                </div>
+                <!-- /store products -->
+            </div>
+            <!-- /STORE -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <p>S'incrire pour la <strong>NEWSLETTER</strong></p>
+                    <form>
+                        <input class="input" type="email" placeholder="Entrer votre Email">
+                        <button class="newsletter-btn"><i class="far fa-envelope"></i> S'inscrire</button>
+                    </form>
+                    <ul class="newsletter-follow">
+                        <li>
+                            <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://plus.google.com/" target="_blank"><i class="fab fa-google-plus-g"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /NEWSLETTER -->
+
+<!-- FOOTER -->
+<footer id="footer">
+    <!-- top footer -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-4 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">À propos de nous</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+                        <ul class="footer-links">
+                            <li><a href="#"><i class="fas fa-map-marker-alt"></i> 4 rue Émile Blin, 94200 Ivry-Sur-Seine, France</a></li>
+                            <li><a href="#"><i class="fas fa-phone"></i> +33 768 329 294</a></li>
+                            <li><a href="#"><i class="fas fa-at"></i> contact@ideal.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Informations</h3>
+                        <ul class="footer-links">
+                            <li><a href="politique.html">Politique de confidentialité</a></li>
+                            <li><a href="partner.html">Nos partenaires</a></li>
+                            <li><a href="terms.html">Termes & Conditions</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /top footer -->
+
+    <!-- bottom footer -->
+    <div id="bottom-footer" class="section">
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+							<span class="copyright">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy; Ideal <script>document.write(new Date().getFullYear());</script> - All rights reserved
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</span>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /bottom footer -->
+</footer>
+<!-- /FOOTER -->
+
+<!-- jQuery Plugins -->
+
+<script src="vendor/js/jquery.min.js"></script>
+<script src="vendor/js/jquery.zoom.min.js"></script>
+<script src="vendor/js/bootstrap.min.js"></script>-->
+<script src="vendor/i18next/i18next.min.js"></script>
+<script src="vendor/js/custom.js"></script>
+<script src="vendor/js/slick.min.js"></script>
+<script src="vendor/js/nouislider.min.js"></script>
+<script src="vendor/js/main.js"></script>
+<script src="vendor/js/translate.js"></script>
+
+</body>
+</html>

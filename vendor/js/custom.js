@@ -1,8 +1,12 @@
 
-let urlServer = "http://localhost:18080";//"http://78.192.12.79:18080";
-let urlArticle = urlServer + "/article";
-let urlUser = urlServer + "/user";
-let urlImg = urlServer + "/upload";
+let urlServerJava = "http://78.192.12.79:18080";//"http://localhost:18080";//
+let urlServerNode = "http://78.192.12.79:8000";
+let urlArticle = urlServerJava + "/article";
+let urlUser = urlServerJava + "/user";
+let urlPostImg = urlServerNode + "/upload";
+let urlImgGet = urlServerNode + "/public";
+let urlImgGetArticle = urlImgGet + "/article-";
+let urlImgGetUser = urlImgGet + "/user-";
 
 $(function(){
     let isConnected = localStorage['connected'];
@@ -14,8 +18,6 @@ $(function(){
     initTableArticleJson();
 
     $('#userName').val(localStorage['email']);
-
-    //
 
     if (isConnected) {
         $('#connexionInscription').hide(); //.show();
@@ -29,8 +31,16 @@ $(function(){
         $('#favoris').hide();
     }
 
-    //
-
+    $('#termspolitique').on('change', function () {
+        if ($('#termspolitique').attr('checked')) {
+            $('#btnAddUser').attr('disabled', 'disabled');
+            $('#termspolitique').removeAttr('checked');
+        }
+        else{
+            $('#btnAddUser').removeAttr('disabled');
+            $('#termspolitique').attr('checked', 'checked');
+        }
+    });
 
     $('#searchh').on('change', function () {
         recherche();
@@ -49,6 +59,7 @@ $(function(){
         if (email && password){
             console.log("A var is not empty");
             //alert();
+            alert("Connexion en cours...");
             checkLoginPwd(email, password);
             //getToken(email, password);
         }else{
@@ -58,15 +69,11 @@ $(function(){
         console.log("J'ai terminé la function");
     });
 
-    //
-
     $('#deconnexion').on('click', function () {
         console.log("Je lance la function");
         goDeconnexion();
         console.log("J'ai terminé la function");
     });
-
-    //
 
     $('#btnAddUser').on('click', function () {
         console.log("Click btn add user");
@@ -90,8 +97,6 @@ $(function(){
 
         document.location.href="index.html";
     });
-
-    //
 
     $('#btnAddDeal').on('click', function () {
         console.log("Click btn add deal");
@@ -117,12 +122,9 @@ $(function(){
         document.location.href="index.html";
     });
 
-    //
-
 
 
     function addArticle(articleName, description, price) {
-        //$.support.cors = true;
         $.ajax(
             {
                 contentType: 'application/json',
@@ -131,7 +133,7 @@ $(function(){
                 data: JSON.stringify ({name : articleName, img : 0, description : description, price : price}),
                 url: urlArticle,
                 error: (xhr, status, error) => {
-                    alert("Nous somme navrez mais l'ajout de votre article a échoué... Veuillez réessayer s'il vous plaît");
+                    alert("Nous somme navré mais l'ajout de votre article a échoué... Veuillez réessayer s'il vous plaît");
                     document.location.href="addDeal.html";
                     console.log("Error request : Add Deal");/* var errorMessage = xhr.responseJSON.message */ }
 
@@ -250,17 +252,19 @@ $(function(){
         if(updated === null) updated = "01/01/2000";
         if(description === null) description = "No description...";
         if(price === null) price = "24.99";
+        let img = urlImgGetArticle + id + ".jpg";
 
         let brefDescription = description.length > 70 ? cutStringBeginingToIndex(description, 80) : description;
+        let brefName = name.length >= 20 ? cutStringBeginingToIndex(name, 17) : name;
 
         return(
             "<!-- product -->" +
             "<div class='product'>" +
             "<div class='product-img'>" +
-            "<img src='vendor/img/product" + id + ".png'>" +
+            "<img src='" + img + "'>" +
             "</div>" +
             "<div class='product-body'>" +
-            "<h3 class='product-name'><a href='#' data-toggle='modal' data-target='#DealModal" + id + "'>" + name + "</a></h3>" +
+            "<h3 class='product-name'><a href='#' data-toggle='modal' data-target='#DealModal" + id + "'>" + brefName + "</a></h3>" +
             "<h4 class='product-price'>" + price + "€</h4>" +
             "<p class='product-category'>" + created + "</p>" +
             "<div class='product-rating'>" +
@@ -271,9 +275,9 @@ $(function(){
             "<i class='far fa-star'></i>" +
             "</div>" +
             "<div class='product-btns'>" +
-            "<button><i class='far fa-thumbs-up'></i></i><span class='tooltipp'>J'aime</span></button>" +
+            "<button><i class='far fa-thumbs-up'></i><span class='tooltipp'>J'aime</span></button>" +
             "<button class='add-to-wishlist'><i class='far fa-heart'></i><span class='tooltipp'>Ajouter aux favoris</span></button>" +
-            "<button class='quick-view' data-toggle='modal' data-target='#DealModal" + id + "'><i class='far fa-eye'></i><span class='tooltipp'>Aperçus</span></button>" +
+            "<button class='quick-view' data-toggle='modal' data-target='#DealModal" + id + "'><a href=''><i class='far fa-eye'></i></a> <span class='tooltipp'>Voir plus de détail</span></button>" +
             "<button><i class='far fa-thumbs-down'></i><span class='tooltipp'>J'aime pas</span></button>" +
             "</div>" +
             "</div>" +
@@ -281,51 +285,8 @@ $(function(){
             "<a target='_blank' href='http://www.google.fr'><button class='add-to-cart-btn' ><i class='fa fa-shopping-cart'></i> Aller vers le deal</button></a>" +
             "</div>" +
             "</div>" +
-            "<!-- /product -->" +
-            articleHTMLmodal(id, name, created, updated, description, price)
+            "<!-- /product -->"
         );
-    }
-
-    function articleHTMLmodal(id, name, created, updated, description, price){
-        return (
-            "<!-- Deal Modal -->" +
-            "<div class='modal fade' id='DealModal" + id + "' tabindex='-1' role='dialog' aria-labelledby='DealModalLabel' aria-hidden='true'>" +
-            "<div class='modal-dialog modal-dialog-centered modal-lg' role='document'>" +
-            "<div class='modal-content'>" +
-            "<div class='modal-header'>" +
-            "<h5 class='modal-title textBold' id='DealModalLabel'>" + name + "</h5>" +
-            "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
-            "</button>" +
-            "</div>" +
-            "<div class='modal-body'>" +
-            "<div class='row'>" +
-            "<div class='col-lg-4'>" +
-            "<a href='#'><img src='vendor/img/product" + id + ".png'></a>" +
-            "<div class='product-rating'>" +
-            "<i class='fa fa-star'></i>" +
-            "<i class='fa fa-star'></i>" +
-            "<i class='fa fa-star'></i>" +
-            "<i class='fa fa-star'></i>" +
-            "<i class='fa fa-star-o'></i>" +
-            "</div>" +
-            "<small class='text-muted alignRight'>" + updated + "</small>" +
-            "</div>" +
-            "<div class='col-lg-8'>" +
-            "<h5><a target='_blank' href='http://www.google.fr'>" + name + "</a></h5>" +
-            "<h5>" + price + "€</h5>" +
-            "<p class='card-text'>" + description + "</p>" +
-            "</div>" +
-            "</div>" +
-            "</div>" +
-            "<div class='modal-footer'>" +
-            "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>" +
-            "<a target='_blank' href='http://www.google.fr' id='goToDeal'>" +
-            "<button type='button' class='btn btn-primary'>Go Deal !</button>" +
-            "</a>" +
-            "</div>" +
-            "</div>" +
-            "</div>" +
-            "</div>");
     }
 
     function cutStringBeginingToIndex(myString, myIndex){
@@ -375,11 +336,6 @@ $(function(){
             "</td>");
     }
 
-    //AUTH
-    /*
-     * Create form to request access token from Google's OAuth 2.0 server.
-     */
-
     function oauthSignIn() {
         // Google's OAuth 2.0 endpoint for requesting an access token
         let oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
@@ -414,24 +370,17 @@ $(function(){
     }
 
     function checkLoginPwd (mail, pwd){
-        alert("Connexion en cour...");
+
         $.ajax({
             contentType: 'application/json',
             type: 'get',
             dataType: 'json',
             url: urlUser,
-            error: (xhr, status, error) => {
-                console.log("Error request : checkLoginPwd");/* var errorMessage = xhr.responseJSON.message */ }
+            error: (xhr, status, error) => { console.log("Error request : checkLoginPwd"); }
         }).done((data /*json*/) => {
             console.log("Success request : checkLoginPwd");/*S'exécute en cas de succès de la requête*/
             if (data.length > 0) {
                 $.each(data, function (key, val) {
-                    console.log(">" + val.id);
-                    console.log("->" + val.mail);
-                    console.log("->" + mail);
-                    console.log(">" + val.inscription);
-                    console.log(">" + val.img);
-                    console.log(">" + val.admin);
                     if(mail.toUpperCase().trim() == (val.mail).toUpperCase().trim()) {
                         if (!isConnected) {
                             localStorage['connected'] = val.id;
@@ -439,8 +388,7 @@ $(function(){
                             localStorage['admin'] = val.admin;
                         }
                         alert("Connexion réussi !!");
-                        document.location.href="index.html";
-                        //return true;
+                        document.location.href = "index.html";
                         //getToken(val.id, val.mail, val.password); //Ca fonctionne mais le serveur n'est pas en mesure d'ajouter le contenue dans la base de donné
                     }
                 });
@@ -481,6 +429,7 @@ $(function(){
         //console.log(signin);
 
     }
+
     function doneCallbacksTest(){
         console.log("Token is generate !");
         //console.log(window.localStorage);
@@ -500,17 +449,20 @@ $(function(){
             }
         );
     }
+
     function failCallbacksTest(){
         console.log("FAIL !");
         //console.log(window.localStorage.getItem('theToken'));
     }
 
-
-//window.localStorage.setItem(key, value);
-//window.localStorage.getItem(key);
-
-
+    //AUTH
     /*
+     * Create form to request access token from Google's OAuth 2.0 server.
+     */
+
+    /*window.localStorage.setItem(key, value);
+    window.localStorage.getItem(key);
+
     var params = {"grant_type":"password",
             "client_id":"acme1",
             "username":aMail,

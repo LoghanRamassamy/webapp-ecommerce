@@ -1,18 +1,26 @@
 $(function(){
-    var userLang;
+    /*let userLang;
+    userLang = navigator.language || navigator.userLanguage; //Detect language browser*/
 
-    //userLang = navigator.language || navigator.userLanguage; //Detect language browser
-
-    userLang = "fr-FR";
-    changeLng(userLang);
-    $('#selectLanguage').val(userLang);
-
-    $('#selectLanguage').change(function() {
+    changeLng("fr-FR");
+    /*$('#selectLanguage').val(userLang);
+    $('#selectLanguage').on('change', function () {
         userLang = $('#selectLanguage').val();
         changeLng(userLang);
+    });*/
+
+    $('#selectLanguage').on('click', function () {
+        alert("test");
+        if($('#selectLanguage').text() === "English"){
+            $('#selectLanguage').text("Français");
+            changeLng("fr-FR");
+        } else {
+            $('#selectLanguage').text("English");
+            changeLng("en-US");
+        }
     });
 
-    i18next.on('languageChanged', () => { updateContent(); }); //L'IDE mettra surement une erreur à cette ligne mais c'est bien la syntaxe de la lib.
+    i18next.on('languageChanged', () => { updateContent(); }); //L'IDE mettra surement une erreur à cette ligne mais c'est bien la syntaxe.
 
     i18next.init({
             debug: true,
@@ -57,7 +65,8 @@ $(function(){
                             "tradArticleName" : "Article name",
                             "tradTermsOfUse" : "By checking this box you accept the",
                             "tradGetPersoData" : "Get my personal data",
-                            "tradDeletePersoData" : "Delete my account and my personal data"
+                            "tradDeletePersoData" : "Delete my account and my personal data",
+                            "tradSearch" : "Enter here your search"
                         }
                     },
                     "fr-FR": {
@@ -99,12 +108,12 @@ $(function(){
                             "tradArticleName" : "Nom de l'article",
                             "tradTermsOfUse" : "En cochant cette case vous acceptez le",
                             "tradGetPersoData" : "Récupérer mes données personnels",
-                            "tradDeletePersoData" : "Supprimer mon compte ainsi que mes données personnels"
+                            "tradDeletePersoData" : "Supprimer mon compte ainsi que mes données personnels",
+                            "tradSearch" : "Tapez ici votre recherche"
                         }
                     }
                 }
-        }, function(err, t) { updateContent(); }
-    );
+        }, function(err, t) { updateContent(); } );
 
     function updateContent() {
         $('.tradConnect').text(i18next.t('tradConnect'));
@@ -144,9 +153,11 @@ $(function(){
         $('.tradTermsOfUse').text(i18next.t('tradTermsOfUse'));
         $('.tradGetPersoData').text(i18next.t('tradGetPersoData'));
         $('.tradDeletePersoData').text(i18next.t('tradDeletePersoData'));
+        $('.tradSearch').attr("placeholder", i18next.t('tradSearch'));
     }
 
     function changeLng(lng) {
+        alert("changement de language");
         i18next.changeLanguage(lng);
     }
 
